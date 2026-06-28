@@ -18,8 +18,6 @@ COPY --from=builder /pb/pocketbase /usr/local/bin/pocketbase
 
 EXPOSE 8080
 
-VOLUME ["/pb_data"]
-
 ENV PORT=8080
 
 # Use shell form so $PORT expands at runtime
