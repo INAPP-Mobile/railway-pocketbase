@@ -1,0 +1,17 @@
+{
+  "PORT": {
+    "defaultValue": "8080",
+    "description": "Port PocketBase listens on (default: 8080). Railway injects PORT for routing.",
+    "isOptional": true
+  },
+  "ENCRYPTION_KEY": {
+    "defaultValue": "${{secret(32)}}",
+    "description": "Encryption key for encrypting app settings (32 hex chars). Auto-generated on first deploy.",
+    "isOptional": false
+  },
+  "ORIGINS": {
+    "defaultValue": "",
+    "description": "CORS allowed origins (comma-separated). Set to your custom domain if using one.",
+    "isOptional": true
+  }
+}
