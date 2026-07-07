@@ -1,6 +1,6 @@
 # PocketBase on Railway
 
-[![Deploy on Railway](https://railway.com/button.svg)](https://railway.com/deploy/pocketbase-5)
+[![Deploy on Railway](https://railway.app/button.svg)](https://railway.com/new/template/pocketbase-5)
 
 A production-ready [PocketBase](https://pocketbase.io) template for Railway. PocketBase is an open-source backend-as-a-service (BaaS) that combines a SQLite database, file storage, authentication, admin dashboard, and REST API in a single binary.
 
