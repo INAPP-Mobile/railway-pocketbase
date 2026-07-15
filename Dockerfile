@@ -15,10 +15,15 @@ FROM alpine:3.20
 RUN apk add --no-cache ca-certificates
 
 COPY --from=builder /pb/pocketbase /usr/local/bin/pocketbase
+COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
+RUN chmod +x /usr/local/bin/docker-entrypoint.sh
 
 EXPOSE 8080
 
 ENV PORT=8080
 
-# Use shell form so $PORT expands at runtime
-CMD pocketbase serve --http=0.0.0.0:${PORT} --dir=/pb_data
+# First-boot superuser seeding (idempotent) — see docker-entrypoint.sh for details.
+# CMD is wrapped in `sh -c` so ${PORT} / ${PB_DATA} expand at runtime thanks to
+# the ENTRYPOINT entrypoint.sh calling exec "$@" with these tokens.
+ENTRYPOINT ["/usr/local/bin/docker-entrypoint.sh"]
+CMD ["sh", "-c", "pocketbase serve --http=0.0.0.0:${PORT:-8080} --dir=${PB_DATA:-/pb_data}"]

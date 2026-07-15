@@ -10,5 +10,13 @@
   "ORIGINS": {
     "value": "",
     "description": "CORS allowed origins (comma-separated). Set to your custom domain if using one."
+  },
+  "ADMIN_USER": {
+    "value": "admin@example.com",
+    "description": "Email of the first PocketBase superuser. PocketBase CLI requires email format. Used only on first boot against an empty /pb_data volume to auto-seed the admin account."
+  },
+  "ADMIN_PASSWORD": {
+    "value": "ChangeMePocketbase2026!",
+    "description": "Initial password for the auto-seeded first superuser (>=5 chars). The shipped default is a GENERIC PLACEHOLDER — every marketplace deploy of this template starts with the same password because template serializedConfig is publicly readable. **ROTATE THIS FROM THE ADMIN UI IMMEDIATELY AFTER FIRST LOGIN.** Set to a real value, or override with the placeholder + the rotate workflow below."
   }
 }
