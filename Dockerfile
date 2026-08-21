@@ -1,7 +1,7 @@
 # PocketBase Railway Template
 # https://github.com/INAPP-Mobile/railway-pocketbase
 
-FROM alpine:3.20 AS builder
+FROM alpine:3.24 AS builder
 
 ARG PB_VERSION=0.39.5
 
@@ -10,7 +10,7 @@ RUN apk add --no-cache ca-certificates unzip wget \
     && unzip pocketbase_${PB_VERSION}_linux_amd64.zip -d /pb \
     && rm pocketbase_${PB_VERSION}_linux_amd64.zip
 
-FROM alpine:3.20
+FROM alpine:3.24
 
 RUN apk add --no-cache ca-certificates
 
