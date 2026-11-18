@@ -71,7 +71,7 @@ In the Railway deploy form (or `.env`), set both:
 - `ADMIN_USER` — your email (PocketBase CLI enforces valid email format). Default: `admin@example.com`.
 - `ADMIN_PASSWORD` — at least 5 characters. **Default placeholder:** `ChangeMePocketbase2026!` — see “Rotate after first login” below before relying on it.
 
-The entrypoint script (`docker-entrypoint.sh`) detects the empty `/pb_data` volume on first boot and runs `pocketbase superuser create "$ADMIN_USER" "$ADMIN_PASSWORD"`. Subsequent deploys leave credentials alone — the script only seeds when `data.db` is absent, so redeploys and restarts are safe. Log in at `https://<your-app>.up.railway.app/_/`.
+The entrypoint script (`docker-entrypoint.sh`) detects the empty `/pb_data` volume on first boot and runs `pocketbase superuser create "$ADMIN_USER" "$ADMIN_PASSWORD"`. Subsequent deploys leave credentials alone — the script only seeds when `data.db` is absent, so redeploys and restarts are safe. Log in at `https://{your-app}.up.railway.app/_/`.
 
 **Path B — Use the in-app UI**
 
@@ -102,18 +102,18 @@ After rotating, optionally also update the `ADMIN_PASSWORD` env var on the Railw
 **Programmatic login (cURL)**
 
 ```bash
-curl -X POST https://<your-app>.up.railway.app/api/collections/_superusers/auth-with-password \
+curl -X POST https://{your-app}.up.railway.app/api/collections/_superusers/auth-with-password \
   -H 'Content-Type: application/json' \
-  -d '{"identity":"<ADMIN_USER>","password":"<ADMIN_PASSWORD>"}'
+  -d '{"identity":"ADMIN_USER","password":"ADMIN_PASSWORD"}'
 ```
 
 Expected response:
 
 ```json
-{"token":"<JWT>","admin":{"id":"...","email":"<ADMIN_USER>"}}
+{"token":"{JWT}","admin":{"id":"...","email":"ADMIN_USER"}}
 ```
 
-The returned `token` is a JWT you can pass as `Authorization: <token>` to `/api/collections/...` calls (e.g. listing collections, managing records).
+The returned `token` is a JWT you can pass as `Authorization: {token}` to `/api/collections/...` calls (e.g. listing collections, managing records).
 
 ### Local Development
 
@@ -149,13 +149,13 @@ Once deployed, PocketBase exposes the following endpoints:
 POST /api/collections/_superusers/auth-with-password
 Content-Type: application/json
 
-{"identity":"<ADMIN_USER>","password":"<ADMIN_PASSWORD>"}
+{"identity":"ADMIN_USER","password":"ADMIN_PASSWORD"}
 ```
 
 Expected response (`200 OK`):
 
 ```json
-{"token":"<JWT>","admin":{"id":"...","email":"<ADMIN_USER>"}}
+{"token":"{JWT}","admin":{"id":"...","email":"ADMIN_USER"}}
 ```
 
 The same `/api/collections/{name}/auth-with-password` pattern works for any user collection (`/api/collections/users/...`, etc.).
